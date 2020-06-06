@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;   
+}
+
+#current-time {
+    font-size: 80px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 250px;
+    margin-bottom: 40px;
+}
+
+#timer {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#timer input {
+    margin-left: 15px;
+    height: 25px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 20px;
+}
+
+#timer button {
+    margin-left: 15px;
+    height: 30px;
+    width: 100px;
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+#left-time {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
