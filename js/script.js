@@ -1,6 +1,6 @@
 const ADD_ZERO_TO_TIME = 10;
-const MILLISECONDS_IN_SECOND = 1000;
-const SECONDS_IN_MINUTE = 60;
+const MIL_IN_SEC = 1000;
+const SEC_IN_MIN = 60;
 
 const container = document.getElementById('container');
 
@@ -8,7 +8,7 @@ addClock()
 addTimerMenu()
 
 function addClock () {
-    let currentDate, currentHours, currentMinutes, currentSeconds, currentTime;
+    let currentDate, currentTime;
     const div = document.createElement('div');
     div.setAttribute('id', 'current-time');
     div.textContent = 'Loading...'    
@@ -17,8 +17,8 @@ function addClock () {
         currentDate = new Date();
         currentTime = currentDate.toLocaleTimeString('it-IT');
         div.textContent = `${currentTime}`;
-    }, MILLISECONDS_IN_SECOND);
-};
+    }, MIL_IN_SEC);
+}
 
 function addTimerMenu () {
     const div = document.createElement('div');
@@ -38,28 +38,28 @@ function addTimerMenu () {
     resetButton.textContent = 'Reset';
     div.append(label, input, startButton, stopButton, resetButton);
     container.append(div);
-};
+}
 
 function startTimer () {
     let interval = document.querySelector('input').value;
-    const secondInterval = interval * SECONDS_IN_MINUTE || interval.split(':')[0] * SECONDS_IN_MINUTE + +interval.split(':')[1];
-    const milisecondsInterval = secondInterval * MILLISECONDS_IN_SECOND;
+    const secondInterval = interval * SEC_IN_MIN || interval.split(':')[0] * SEC_IN_MIN + +interval.split(':')[1];
+    const milisecondsInterval = secondInterval * MIL_IN_SEC;
     timer(milisecondsInterval);
-};
+}
 
 function timer (miliseconds) {
     let timeLeft = miliseconds;
     window.timerTickTac = setInterval(() => {
-        secondsLeft = timeLeft / MILLISECONDS_IN_SECOND % SECONDS_IN_MINUTE;
-        minutesLeft = (timeLeft / MILLISECONDS_IN_SECOND - secondsLeft) / SECONDS_IN_MINUTE;
+        let secondsLeft = timeLeft / MIL_IN_SEC % SEC_IN_MIN;
+        let minutesLeft = (timeLeft / MIL_IN_SEC - secondsLeft) / SEC_IN_MIN;
         if (secondsLeft < ADD_ZERO_TO_TIME) {
             secondsLeft = '0' + secondsLeft;
         }
         if (minutesLeft < ADD_ZERO_TO_TIME) {
             minutesLeft = '0' + minutesLeft;
         }
-        leftTime = `${minutesLeft}:${secondsLeft}`;
-        timeLeft -= MILLISECONDS_IN_SECOND;
+        let leftTime = `${minutesLeft}:${secondsLeft}`;
+        timeLeft -= MIL_IN_SEC;
         document.querySelector('input').value = leftTime;
         if (timeLeft < 0) {
             let audio = new Audio();
@@ -67,14 +67,14 @@ function timer (miliseconds) {
             audio.autoplay = true;
             clearInterval(window.timerTickTac);
         }
-    }, MILLISECONDS_IN_SECOND);
-};
+    }, MIL_IN_SEC);
+}
 
 function stopTimer () {
     clearInterval(window.timerTickTac);
-};
+}
 
 function resetTimer () {
     clearInterval(window.timerTickTac);
     document.querySelector('input').value = '';
-};
+}
